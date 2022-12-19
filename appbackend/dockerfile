@@ -5,6 +5,7 @@ COPY go.mod go.sum main.go ./
 RUN go mod download && go mod verify
 RUN go build -o app .
 
+#comment
 FROM golang:alpine
 WORKDIR /root/
 COPY --from=build /usr/src/app ./
