@@ -1,14 +1,11 @@
 # --- root/main.tf ---
 
-#module "network" {
-#  source = "./network"
-#}
-
 # --- http to ip ---
 data "http" "myip" {
   url = "http://ipv4.icanhazip.com"
 }
 
+# --- vm user data ---
 data "cloudinit_config" "user_data" {
   gzip          = false
   base64_encode = false
@@ -49,11 +46,11 @@ resource "local_file" "private_key" {
   file_permission = "0400"
 }
 
+# --- modules ---
 module "secgroup" {
   source = "./modules/secgroup"
   project = local.project
   environment = var.environment
-  #security_group_id = "${openstack_networking_secgroup_v2.secgroup_terrabuntu.id}"
   my_public_ip     = data.http.myip.response_body
   ip_prefix = local.uniza.prefix
 }
@@ -63,7 +60,6 @@ module "compute" {
   source = "./modules/compute"
   project = local.project
   environment = var.environment
-  #security_group_id = "${openstack_networking_secgroup_v2.secgroup_terrabuntu.id}"
   key_pair_name = openstack_compute_keypair_v2.keypair.name
   flavor_name = var.flavor_name
   user_data = data.cloudinit_config.user_data.rendered
