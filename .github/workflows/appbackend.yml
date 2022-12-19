@@ -24,6 +24,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./appbackend
-          file: ./Dockerfile
+          file: ./appbackend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/appbackend:latest
