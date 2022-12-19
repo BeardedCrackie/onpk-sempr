@@ -1,0 +1,25 @@
+FROM node:12-alpine
+USER node
+RUN mkdir -p /home/node/app
+WORKDIR /home/node/app
+#COPY --chown=node . .
+RUN git clone https://github.com/michaello1/zauni-zadanie-appfrontend
+# Building the production-ready application code - alias to 'nest build'
+#RUN yarn instal
+CMD [ "yarn", "start" ]
+
+
+
+#RUN git clone https://github.com/michaello1/zauni-zadanie-appfrontend
+#COPY --from=build /app/env.sh /dockerentrypoint.d
+#COPY conf.d/default.conf /etc/nginx/conf.d
+#
+#
+#
+#FROM nginx:stable-alpine
+#
+#Pre build použite node:12-alpine image a yarn
+# Pre ďalší stage použite nginx:stable-alpine image
+# Použite COPY --from=build /app/env.sh /dockerentrypoint.d a taktiež COPY conf.d/default.conf
+#/etc/nginx/conf.d
+# Vytvorte tag s názvom latest

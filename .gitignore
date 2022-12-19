@@ -1,0 +1,11 @@
+# --- Keys and access
+*.pem
+*.ppk
+*.pem
+
+# --- Terraform ---
+*.tfvars
+.terraform/
+terraform.tfstate.d/
+terraform.tfstate
+terraform.tfstate.backup

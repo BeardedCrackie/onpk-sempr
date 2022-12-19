@@ -1,0 +1,32 @@
+FROM golang:alpine
+
+WORKDIR /usr/src/app
+
+RUN git clone https://github.com/michaello1/zauni-zadanie-appbackend
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
+
+FROM alpine:latest  
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+COPY --from=0 /go/src/github.com/alexellis/href-counter/app ./
+CMD ["./app"]
+
+COPY . .
+RUN go build -v -o /usr/local/bin/app ./...
+
+CMD ["app"]
+
+
+COPY --from=build /app/env.sh /dockerentrypoint.d
+COPY conf.d/default.conf /etc/nginx/conf.d
+
+
+
+FROM nginx:stable-alpine
+
+Pre build použite node:12-alpine image a yarn
+ Pre ďalší stage použite nginx:stable-alpine image
+ Použite COPY --from=build /app/env.sh /dockerentrypoint.d a taktiež COPY conf.d/default.conf
+/etc/nginx/conf.d
+ Vytvorte tag s názvom latest
