@@ -1,33 +1,14 @@
-FROM node:12-alpine
-RUN apk add --no-cache git
-RUN apk add --no-cache yarn
-RUN mkdir -p /home/node/app
-#WORKDIR /home/node/app
-RUN git clone https://github.com/michaello1/zauni-zadanie-appfrontend
-#ADD https://github.com/michaello1/zauni-zadanie-appfrontend /home/node/app
-COPY /zauni-zadanie-appfrontend /home/node/app/
+FROM node:12-alpine AS build
+RUN apk add yarn \
+    && mkdir -p /app
+COPY . /app
+WORKDIR /app
+RUN yarn install \
+    && yarn build
 
-WORKDIR /home/node/app/zauni-zadanie-appfrontend
-
-#COPY --chown=node . .
-
-# Building the production-ready application code - alias to 'nest build'
-RUN yarn install
-CMD [ "yarn", "start" ]
-
-
-
-
-#RUN git clone https://github.com/michaello1/zauni-zadanie-appfrontend
-#COPY --from=build /app/env.sh /dockerentrypoint.d
-#COPY conf.d/default.conf /etc/nginx/conf.d
-#
-#
-#
-#FROM nginx:stable-alpine
-#
-#Pre build použite node:12-alpine image a yarn
-# Pre ďalší stage použite nginx:stable-alpine image
-# Použite COPY --from=build /app/env.sh /dockerentrypoint.d a taktiež COPY conf.d/default.conf
-#/etc/nginx/conf.d
-# Vytvorte tag s názvom latest
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/env.sh /dockerentrypoint.d
+COPY conf.d/default.conf /etc/nginx/conf.d
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
