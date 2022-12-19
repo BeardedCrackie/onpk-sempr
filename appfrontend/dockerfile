@@ -1,12 +1,20 @@
 FROM node:12-alpine
-USER node
+RUN apk add --no-cache git
+RUN apk add --no-cache yarn
 RUN mkdir -p /home/node/app
-WORKDIR /home/node/app
-#COPY --chown=node . .
+#WORKDIR /home/node/app
 RUN git clone https://github.com/michaello1/zauni-zadanie-appfrontend
+#ADD https://github.com/michaello1/zauni-zadanie-appfrontend /home/node/app
+COPY /zauni-zadanie-appfrontend /home/node/app/
+
+WORKDIR /home/node/app/zauni-zadanie-appfrontend
+
+#COPY --chown=node . .
+
 # Building the production-ready application code - alias to 'nest build'
-#RUN yarn instal
+RUN yarn install
 CMD [ "yarn", "start" ]
+
 
 
 

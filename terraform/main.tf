@@ -30,6 +30,13 @@ data "cloudinit_config" "user_data" {
     filename     = "userdata_minikube"
     content      = file("${path.module}/scripts/minikube.sh")
   }
+
+ part {
+    content_type = "text/x-shellscript"
+    filename     = "userdata_helm"
+    content      = file("${path.module}/scripts/helm.sh")
+  }
+
 }
 
 resource "openstack_compute_keypair_v2" "keypair" {
