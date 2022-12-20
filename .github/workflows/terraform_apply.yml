@@ -42,7 +42,7 @@
 #       with:
 #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-name: "Terraform"
+name: "Terraform apply"
 
 on: workflow_dispatch
 
@@ -68,6 +68,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: terraform
 
     steps:
       # Checkout the repository to the GitHub Actions runner
@@ -111,3 +112,5 @@ jobs:
       - name: Terraform Apply
         # if: github.ref == 'refs/heads/"master"' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+        with:
+          path: my-terraform-config
