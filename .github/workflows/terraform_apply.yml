@@ -100,7 +100,7 @@ jobs:
         timeout-minutes: 2
         run: |
           sudo openvpn --config vpngw2.uniza.sk.ovpn --auth-user-pass secret.txt --daemon
-          do sleep 5
+          sleep 15
 
       # Generates an execution plan for Terraform
       - name: Terraform Plan
