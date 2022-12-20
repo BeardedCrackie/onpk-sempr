@@ -1,3 +1,4 @@
+# --- secgroup/main.tf ---
 
 # --- security groups ---
 resource "openstack_networking_secgroup_v2" "public_secgroup" {
