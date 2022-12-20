@@ -2,9 +2,12 @@
 
 terraform {
   cloud {
-    organization = local.organization
+    #hostname = "app.terraform.io"
+    #organization = local.organization
+    organization = "potociarm"
     workspaces {
-      name = local.project
+      #name = local.project
+      name = "onpk-sem-k8s"
     }
   }
 }
