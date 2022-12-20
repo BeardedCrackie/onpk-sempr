@@ -2,9 +2,9 @@
 
 terraform {
   cloud {
-    organization = "var.organization"
+    organization = local.organization
     workspaces {
-      name = "var.workspace"
+      name = local.project
     }
   }
 }
