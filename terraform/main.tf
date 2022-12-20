@@ -1,5 +1,14 @@
 # --- root/main.tf ---
 
+terraform {
+  cloud {
+    organization = "var.organization"
+    workspaces {
+      name = "var.workspace"
+    }
+  }
+}
+
 # --- http to ip ---
 data "http" "myip" {
   url = "http://ipv4.icanhazip.com"
