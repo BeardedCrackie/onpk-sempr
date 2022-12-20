@@ -68,7 +68,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: terraform
+        working-directory: ./terraform
 
     steps:
       # Checkout the repository to the GitHub Actions runner
@@ -86,8 +86,8 @@ jobs:
         run: terraform init
 
       # Checks that all Terraform configuration files adhere to a canonical format
-      #- name: Terraform Format
-      #  run: terraform fmt -check
+      - name: Terraform Format
+        run: terraform fmt -check
 
       - name: Install and setup OpenVPN
         run: |
@@ -96,12 +96,14 @@ jobs:
           wget https://ikt.uniza.sk/apps/vpn/vpngw2.uniza.sk.ovpn
           echo "${{ secrets.VPN_USER }}" >> secret.txt
           echo "${{ secrets.VPN_PASSWORD }}" >> secret.txt
+        working-directory: ./
 
       - name: Connect to OpenVPN
         timeout-minutes: 2
         run: |
           sudo openvpn --config vpngw2.uniza.sk.ovpn --auth-user-pass secret.txt --daemon
           sleep 15
+        working-directory: ./
 
       # Generates an execution plan for Terraform
       - name: Terraform Plan
