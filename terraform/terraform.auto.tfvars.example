@@ -1,6 +1,6 @@
 # --- terraform.auto.tfvars.template ---
 
 # values are privided as string, so don't forget qotes
-username    = "<os_username>"
+user_name    = "<os_username>"
 password    = "<os_password>"
 tenant_name = "<os_project_name>"
