@@ -60,7 +60,7 @@ permissions:
 
 jobs:
   call-workflow:
-    uses: octo-org/example-repo/.github/workflows/workflow-A.yml@v1
+    uses: .github/workflows/terraform_plan.yml
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
