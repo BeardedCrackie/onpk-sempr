@@ -13,4 +13,6 @@ locals {
     prefix = "158.193.0.0/16"
   }
   project = lower("onpk-sem-k8s")
+  organization = "potociarm"
+  
 }
