@@ -43,14 +43,17 @@
 #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
 name: "Terraform"
-on:
-  #schedule:
-  #  - cron: "*/15 * * * *" # At every 15th minute
-  push:
-    branches:
-      - "master"
-    paths:
-      - appbackend/**
+
+on: workflow_dispatch
+
+#on:
+#  #schedule:
+#  #  - cron: "*/15 * * * *" # At every 15th minute
+#  push:
+#    branches:
+#      - "master"
+#    paths:
+#      - appbackend/**
 
 permissions:
   contents: read
