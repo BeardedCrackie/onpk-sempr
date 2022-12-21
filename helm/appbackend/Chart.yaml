@@ -1,0 +1,11 @@
+apiVersion: v2
+name: appbackend
+description: A Helm chart for onpk-sempr-backend
+type: application
+version: 0.1.0
+appVersion: "latest"
+
+dependencies:
+  - name: mongodb
+    version: "~13.4"
+    repository: "https://charts.bitnami.com/bitnami"

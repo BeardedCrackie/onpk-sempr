@@ -1,0 +1,25 @@
+# prettier-ignore
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appfrontend-deployment
+  labels:
+    app: appfrontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: appfrontend
+  template:
+    metadata:
+      labels:
+        app: appfrontend
+    spec:
+      containers:
+        - name: appfrontend
+          image: crackiesvk/appfrontend:latest
+          ports:
+            - containerPort: 8080
+          env:
+          - name: appbackendUrl
+            value: {{ .Values.appbackendUrl }}

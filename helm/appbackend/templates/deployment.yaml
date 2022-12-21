@@ -1,0 +1,29 @@
+# prettier-ignore
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appbackend-deployment
+  labels:
+    app: appbackend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: appbackend
+  template:
+    metadata:
+      labels:
+        app: appbackend
+    spec:
+      containers:
+        - name: appbackend
+          image: crackiesvk/appbackend:latest
+          ports:
+            - containerPort: 9080
+          env:
+          - name: MONGO_USERNAME
+            value: {{ .Values.appbackendDb.user }}
+          - name: MONGO_PASSWORD
+            value: {{ .Values.appbackendDb.password }}
+          - name: MONGO_CONN_STR
+            value: "mongodb://localhost:27017/{{ .Values.appbackendDb.dbname }}"
