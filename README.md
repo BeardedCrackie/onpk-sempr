@@ -8,7 +8,7 @@
 - appbackend - dockerfile and src files for creating image for appbackend
 - appfrontend - dockerfile and src files for creating image for appfrontend
 - terraform folder - provisioning for OpenStack private cloud with usage of IaaC tool Terraform
-- helm - supposed to be folder used for maintaining the helm charts
+- helm - folder used for maintaining the helm charts
 
 ### terraform
 
@@ -38,4 +38,4 @@ defines actions and it's pipelines for build or test
 - appbackend - on push to appbackend folder the code is builded and pushed to dockerhub crackiesvk/appbackend with latest tag
 - appfrontend - aon push to appbackend folder the code is builded and pushed to dockerhub crackiesvk/appfrontend with latest tag
 - terraform_check - on push to terraform folder the code is checked to be in correct format
-- terraform_deploy - on manual action, terraform apply will be used to change remote server configuration
+- terraform_deploy - on manual action, terraform apply will be used to change remote server configuration (vpc install, docker, minikube, helm install)
