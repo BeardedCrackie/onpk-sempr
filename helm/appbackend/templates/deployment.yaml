@@ -26,4 +26,4 @@ spec:
           - name: MONGO_PASSWORD
             value: {{ .Values.appbackendDb.password }}
           - name: MONGO_CONN_STR
-            value: "mongodb://localhost:27017/{{ .Values.appbackendDb.dbname }}"
+            value: "mongodb://appbackend-mongodb:27017/{{ .Values.appbackendDb.dbname }}"

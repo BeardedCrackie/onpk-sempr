@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: "service-appfrontend"
 spec:
+  type: NodePort
   selector:
     app: appfrontend
   ports:
